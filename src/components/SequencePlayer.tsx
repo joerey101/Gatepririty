@@ -12,7 +12,7 @@ if (typeof window !== 'undefined') {
 const frameCount = 901;
 
 const currentFrame = (index: number) =>
-  `/footage/GatePriority_${index.toString().padStart(3, '0')}.jpeg`;
+  `/footage/GatePriority_${index.toString().padStart(3, '0')}.webp`;
 
 export default function SequencePlayer() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
