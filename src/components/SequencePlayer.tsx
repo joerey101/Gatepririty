@@ -19,6 +19,7 @@ export default function SequencePlayer() {
   const containerRef = useRef<HTMLDivElement>(null);
   const [images, setImages] = useState<HTMLImageElement[]>([]);
   const [loadedFrames, setLoadedFrames] = useState(0);
+  const [showScrollPrompt, setShowScrollPrompt] = useState(true);
 
   // function to scale image to cover canvas
   const drawCoverImage = (
@@ -117,7 +118,15 @@ export default function SequencePlayer() {
         frame: frameCount - 1,
         snap: 'frame',
         ease: 'none',
-        onUpdate: render,
+        onUpdate: () => {
+          render();
+          // Hide the scroll prompt after scrolling past frame 10
+          if (playhead.frame > 10) {
+            setShowScrollPrompt(false);
+          } else {
+            setShowScrollPrompt(true);
+          }
+        },
       }),
     });
 
@@ -139,6 +148,21 @@ export default function SequencePlayer() {
           </p>
         </div>
       )}
+      
+      {/* Scroll Indicator overlay */}
+      {loadedFrames === frameCount && (
+        <div 
+          className={`absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center justify-center z-20 pointer-events-none transition-opacity duration-500 ${showScrollPrompt ? 'opacity-100' : 'opacity-0'}`}
+        >
+          <div className="w-8 h-12 border-2 border-white rounded-full flex justify-center p-1 mb-3">
+            <div className="w-1.5 h-3 bg-white rounded-full animate-bounce mt-1"></div>
+          </div>
+          <p className="text-white font-medium text-sm tracking-widest uppercase drop-shadow-md">
+            Scroll Down to activate
+          </p>
+        </div>
+      )}
+
       <canvas 
         ref={canvasRef} 
         className="block w-full h-full"
