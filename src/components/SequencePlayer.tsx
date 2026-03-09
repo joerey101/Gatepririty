@@ -152,7 +152,7 @@ export default function SequencePlayer() {
       {/* Scroll Indicator overlay */}
       {loadedFrames === frameCount && (
         <div 
-          className={`absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center justify-center z-20 pointer-events-none transition-opacity duration-500 ${showScrollPrompt ? 'opacity-100' : 'opacity-0'}`}
+          className={`absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center justify-center z-20 pointer-events-none transition-opacity duration-500 bg-black/80 px-8 py-5 rounded-3xl backdrop-blur-sm shadow-xl border border-white/10 ${showScrollPrompt ? 'opacity-100' : 'opacity-0'}`}
         >
           <div className="w-8 h-12 border-2 border-white rounded-full flex justify-center p-1 mb-3">
             <div className="w-1.5 h-3 bg-white rounded-full animate-bounce mt-1"></div>
